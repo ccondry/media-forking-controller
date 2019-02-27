@@ -106,9 +106,9 @@ import org.w3c.dom.Node;
                 @WebInitParam(name = "ListenAddress", value = "this-IP-host"),
                 @WebInitParam(name = "GatewayHostList", value = "gateway-IP-host, ..."),  */
 
-                @WebInitParam(name = "GatewayHostList", value = "10.58.16.172"),
-                @WebInitParam(name = "ListenAddress", value = "10.58.16.187"),
-                @WebInitParam(name = "ListenPort", value = "19090")
+                @WebInitParam(name = "GatewayHostList", value = "198.18.133.226"),
+                @WebInitParam(name = "ListenAddress", value = "198.18.134.28"),
+                @WebInitParam(name = "ListenPort", value = "8080")
             })
 
 

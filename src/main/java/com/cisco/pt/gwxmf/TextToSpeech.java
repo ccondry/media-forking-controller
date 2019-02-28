@@ -133,10 +133,12 @@ public class TextToSpeech extends HttpServlet {
                     SimpleDateFormat fmt = new SimpleDateFormat("TTS'_DDDHHmmssSSS'.wav");
                     String filename = fmt.format(new Date());
                     // construct folder path
-                    String folder = "tts/" + lang + "/" + voice + "/" + encoding;
-                    File file = new File(folder + filename);
+                    String folderPath = "tts/" + lang + "/" + voice + "/" + encoding;
+                    File folder = new File(folderPath);
                     // make sure the folder exists
-                    file.mkdirs();
+                    folder.mkdirs();
+                    // construct entire file path
+                    String audfile = folder + filename;
                     // write the audio file to the filesystem
                     try (OutputStream out = new FileOutputStream(file)) {
                         int writelen = AudioSystem.write(audout, AudioFileFormat.Type.WAVE, out);

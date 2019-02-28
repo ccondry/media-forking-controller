@@ -130,8 +130,7 @@ public class TextToSpeech extends HttpServlet {
                     AudioInputStream audin = new AudioInputStream(audioPayload.newInput(), audinfmt, audioPayload.size() / 2);
                     AudioInputStream audout = AudioSystem.getAudioInputStream(codec, audin);
                     // construct file name using current date and time
-                    SimpleDateFormat fmt = new SimpleDateFormat("TTS'_DDDHHmmssSSS'.wav");
-                    String filename = fmt.format(new Date());
+                    String filename = "TTS_" + System.currentTimeMillis() + ".wav";
                     // construct folder path
                     String folderPath = "tts/" + lang + "/" + voice + "/" + encoding;
                     File folder = new File(folderPath);

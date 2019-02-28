@@ -133,7 +133,7 @@ public class TextToSpeech extends HttpServlet {
                     SimpleDateFormat fmt = new SimpleDateFormat("TTS'_DDDHHmmssSSS'.wav");
                     String filename = fmt.format(new Date());
                     // construct folder path
-                    String folder = "tts/" + lang + "/" + voice + "/" + encoding
+                    String folder = "tts/" + lang + "/" + voice + "/" + encoding;
                     File file = new File(folder + filename);
                     // make sure the folder exists
                     file.mkdirs();

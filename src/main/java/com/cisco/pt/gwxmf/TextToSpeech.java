@@ -11,7 +11,7 @@ package com.cisco.pt.gwxmf;
  * ===================================================================================
  *
  * TEXT TO SPEECH USING GOOGLE CLOUD
- * 
+ *
  * Uses Google Speech Service TTS to generate WAV file and stream in response to
  * servlet requests.  The response content is delivered as type audio/x-wav.
  *
@@ -80,7 +80,7 @@ public class TextToSpeech extends HttpServlet {
 
     static final String TTSMAPFILE = "tts/ttsmap.json";
     static final int WAVFILE_STANDARD_HDRLEN = 44;
-    ConcurrentHashMap<String, String> ttsfile = new ConcurrentHashMap<>();         
+    ConcurrentHashMap<String, String> ttsfile = new ConcurrentHashMap<>();
 
     protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -88,19 +88,19 @@ public class TextToSpeech extends HttpServlet {
         String text = req.getParameter("text");
 
         if (text == null ||
-            req.getPathInfo() == null ||            
+            req.getPathInfo() == null ||
             (pathitems = req.getPathInfo().split("/")).length < 4) {
 
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid URL, missing mandatory fields");                
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid URL, missing mandatory fields");
 
         } else {
             System.out.println("\nRequest (" + req.getRequestURI() + ") from " + req.getRemoteAddr());
             System.out.println("TTS text = <" + text + ">\n");
-            
+
             String lang = pathitems[1];
             String voice = pathitems[2].toUpperCase();
             String encoding = pathitems[3].toUpperCase();
-            
+
             String key = lang + ":" + voice + ":" + encoding + ":" + text;
             String fna = ttsfile.get(key);
 
@@ -124,7 +124,7 @@ public class TextToSpeech extends HttpServlet {
                     ByteString audioPayload = audioContents.substring(WAVFILE_STANDARD_HDRLEN);
                     AudioFormat audinfmt = new AudioFormat(8000f, 16, 1, true, false);
 
-                    AudioFormat.Encoding codec = "ULAW".equals(encoding) ? AudioFormat.Encoding.ULAW : 
+                    AudioFormat.Encoding codec = "ULAW".equals(encoding) ? AudioFormat.Encoding.ULAW :
                                                  "ALAW".equals(encoding) ? AudioFormat.Encoding.ALAW : AudioFormat.Encoding.ULAW;
 
                     AudioInputStream audin = new AudioInputStream(audioPayload.newInput(), audinfmt, audioPayload.size() / 2);

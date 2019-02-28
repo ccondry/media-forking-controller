@@ -137,7 +137,7 @@ public class TextToSpeech extends HttpServlet {
                     // make sure the folder exists
                     folder.mkdirs();
                     // construct entire file path
-                    String audfile = folder + filename;
+                    String audfile = folder + "/" + filename;
                     // write the audio file to the filesystem
                     try (OutputStream out = new FileOutputStream(audfile)) {
                         int writelen = AudioSystem.write(audout, AudioFileFormat.Type.WAVE, out);

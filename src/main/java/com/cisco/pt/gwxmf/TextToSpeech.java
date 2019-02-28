@@ -129,20 +129,16 @@ public class TextToSpeech extends HttpServlet {
 
                     AudioInputStream audin = new AudioInputStream(audioPayload.newInput(), audinfmt, audioPayload.size() / 2);
                     AudioInputStream audout = AudioSystem.getAudioInputStream(codec, audin);
-                    // construct file name using current date and time
-                    String filename = "TTS_" + System.currentTimeMillis() + ".wav";
-                    // construct folder path
-                    String folderPath = "tts/" + lang + "/" + voice + "/" + encoding;
-                    File folder = new File(folderPath);
-                    // make sure the folder exists
-                    folder.mkdirs();
-                    // construct entire file path
-                    String audfile = folder + "/" + filename;
+
+                    // get temp directory
+                    File tempFile = File.createTempFile("tts", ".wav");
+                    tempFile.deleteOnExit();
+
                     // write the audio file to the filesystem
-                    try (OutputStream out = new FileOutputStream(audfile)) {
+                    try (OutputStream out = new FileOutputStream(tempFile)) {
                         int writelen = AudioSystem.write(audout, AudioFileFormat.Type.WAVE, out);
-                        System.out.println(writelen + " bytes written to file " + audfile);
-                        ttsfile.put(key, audfile);
+                        System.out.println(writelen + " bytes written to file " + tempFile.getAbsolutePath());
+                        ttsfile.put(key, tempFile.getAbsolutePath());
                     }
 
                     audout.reset();

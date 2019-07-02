@@ -20,3 +20,5 @@ git clone -b dcloud git@gitlab.com:ccondry/media-forking-controller.git
 cd media-forking-controller
 # install into tomcat8
 ./install.sh
+# restart tomcat8
+sudo systemctl restart tomcat8

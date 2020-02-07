@@ -1,7 +1,7 @@
 # install java dependencies
-sudo apt install tomcat8 maven openjdk-8-jdk
-# add administrator to tomcat8 group
-sudo usermod -aG tomcat8 administrator
+sudo apt install tomcat9 maven openjdk-9-jdk
+# add administrator to tomcat group
+sudo usermod -aG tomcat administrator
 # switch-user to administrator to make the group change take effect
 su administrator
 # go to install folder
@@ -10,8 +10,8 @@ cd /opt/dcloud
 mkdir gcp
 # copy google cloud project auth json file to server
 (copy gcp.json file with SFTP to /opt/dcloud/gcp/gcp.json )
-# enable gcp file to tomcat8 startup environment vars
-sudo vim /etc/default/tomcat8
+# enable gcp file to tomcat9 startup environment vars
+sudo vim /etc/default/tomcat9
 # add this after the last line:
 GOOGLE_APPLICATION_CREDENTIALS="/opt/dcloud/gcp/gcp.json"
 # clone the "dcloud" branch of the forkctrl-1.2 repository

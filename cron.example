@@ -1,0 +1,1 @@
+*/1 * * * * /bin/sh -c 'cd /opt/dcloud/media-forking-controller && ./update.sh' 2>&1 | /usr/bin/logger -t cron-update-media-forking-controller

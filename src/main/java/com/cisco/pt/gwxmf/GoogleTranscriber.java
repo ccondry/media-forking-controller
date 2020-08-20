@@ -50,6 +50,18 @@ public class GoogleTranscriber {
 
 
     public GoogleTranscriber(String addr, String lang) throws IOException, MediaForkingException {
+      // default single utterance = true
+      // default automatic punctuation = true
+      this(addr, lang, true, true);
+    }
+
+    public GoogleTranscriber(String addr, String lang, boolean singleUtterance) throws IOException, MediaForkingException {
+      // default single utterance = true
+      // default automatic punctuation = true
+      this(addr, lang, singleUtterance, true);
+    }
+
+    public GoogleTranscriber(String addr, String lang, boolean singleUtterance, boolean automaticPunctuation) throws IOException, MediaForkingException {
         cgrtp = new MediaListener(addr);
         cdrtp = new MediaListener(addr);
 
@@ -61,12 +73,12 @@ public class GoogleTranscriber {
                     .setEncoding(RecognitionConfig.AudioEncoding.MULAW)
                     .setSampleRateHertz(8000)
                     .setLanguageCode(lang)
-                    .setEnableAutomaticPunctuation(true)
+                    .setEnableAutomaticPunctuation(automaticPunctuation)
                     .build();
 
         strcfg = StreamingRecognitionConfig.newBuilder()
                     .setConfig(reccfg)
-                    .setSingleUtterance(true)
+                    .setSingleUtterance(singleUtterance)
                     .build();
     }
 
